@@ -1,0 +1,45 @@
+{% load staticfiles %}
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"/>
+<link href="{% static 'css/fonts.css' %}" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"/>
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{% url 'music:index' %}">Waves</a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a href="{% url 'music:index' %}">
+                        <span class="glyphicon glyphicon-cd" aria-hidden="true"></span>&nbsp;Albums
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#">
+                        <span class="glyphicon glyphicon-music" aria-hidden="true"></span>&nbsp;Songs
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+{% if all_albums%}
+    <h2>Here are all my Albums:</h2>
+<ul>
+    {% for album in all_albums %}
+    <li><a href="{%url 'music:detail' album.id%}">{{ album.album_title }}</a></li>
+    {% endfor %}
+</ul>
+{% else %}
+<h3>You don't have any albums</h3>
+{% endif %}
